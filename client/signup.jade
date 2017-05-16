@@ -1,0 +1,33 @@
+doctype html5
+html
+    head
+        title Test Page
+        link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
+        style(type='text/css').
+            .vertical-center {
+                display: flex;
+                margin-top: 10em;
+                justify-content: center;
+            }
+    body
+        script( src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js' )
+        script( src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js' )
+        script( src='https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js' )
+
+
+        .container
+            .vertical-center
+                form(action='/signup' method='POST' data-toggle="validator" role="form").form-signin
+                    .form-group
+                        label(for='username') Username
+                        input(name='username' required )#username.form-control
+                    .form-group
+                        label(for='password') Password
+                        input(type='password' name='password'  required)#password.form-control
+                        label(for='passwordConfirm') Confirm password
+                        input(type='password' name='passwordСonfirm' data-match="#password" data-match-error="Password does not match" required)#passwordConfirm.form-control
+                        .help-block.with-errors
+                    .form-group
+                        button(type='submit').btn.btn-primary Create account
+                    .form-group.text-center
+                        .error #{message}
