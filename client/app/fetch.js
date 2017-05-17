@@ -66,11 +66,9 @@ class ReduxFetch {
             credentials: 'include'
         })
             .then((response) => {
-
                 if (response.status == 401) {
                     window.location = '/login';
                 }
-
                 if (!response.ok) {
                     throw Error(response.statusText);
                 }

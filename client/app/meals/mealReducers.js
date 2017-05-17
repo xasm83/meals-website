@@ -9,15 +9,6 @@ const hasFailed = (hasFailed = false, action) => {
     }
 };
 
-const mealSaved = (mealSaved = false, action) => {
-    switch (action.type) {
-        case 'MEAL_SAVED':
-            return action.mealSaved;
-        default:
-            return mealSaved;
-    }
-};
-
 const mealTextSet = (text = "", action) => {
     switch (action.type) {
         case 'MEAL_TEXT_SET':
@@ -27,10 +18,19 @@ const mealTextSet = (text = "", action) => {
     }
 };
 
+const mealUsernameSet = (username = "", action) => {
+    switch (action.type) {
+        case 'MEAL_USERNAME_SET':
+            return action.username;
+        default:
+            return username;
+    }
+};
+
 const mealCaloriesSet = (calories = 0, action) => {
     switch (action.type) {
         case 'MEAL_CALORIES_SET':
-            return action.calories;
+            return parseInt(action.calories);
         default:
             return calories;
     }
@@ -59,8 +59,8 @@ export default combineReducers({
         date: mealDateSet,
         calories: mealCaloriesSet,
         text: mealTextSet,
-        _id: mealIdSet
+        _id: mealIdSet,
+        username: mealUsernameSet
     }),
-    hasFailed,
-    mealSaved
+    hasFailed
 })

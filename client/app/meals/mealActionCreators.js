@@ -8,7 +8,6 @@ export const addMeal = (history, isAdmin) => {
                 dispatch(mealFailed(true));
             }, () => {
                 dispatch(mealFailed(false));
-                dispatch(mealSaved(true));
                 history.push(getRedirectUrl(isAdmin));
             }
         )
@@ -24,7 +23,6 @@ export const updateMeal = (history, isAdmin) => {
                 dispatch(mealFailed(true));
             }, () => {
                 dispatch(mealFailed(false));
-                dispatch(mealSaved(true));
                 history.push(getRedirectUrl(isAdmin));
             }
         )
@@ -71,6 +69,7 @@ export const setMeal = (meal) => {
         dispatch(setCalories(meal.calories));
         dispatch(setDate(meal.date));
         dispatch(setId(meal._id));
+        dispatch(setUsername(meal.username));
     };
 };
 
@@ -81,17 +80,17 @@ export const mealFailed = (bool) => {
     };
 };
 
-export const mealSaved = (bool) => {
-    return {
-        type: 'MEAL_SAVED',
-        mealSaved: bool
-    };
-};
-
 export const setText = (text) => {
     return {
         type: 'MEAL_TEXT_SET',
         text
+    };
+};
+
+export const setUsername = (username) => {
+    return {
+        type: 'MEAL_USERNAME_SET',
+        username
     };
 };
 

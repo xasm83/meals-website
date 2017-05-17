@@ -6,6 +6,7 @@ import {Link} from 'react-router-dom'
 
 class SettingsComponent extends React.Component {
     componentWillMount() {
+        this.props.dismissSettingsSaved();
         this.props.fetchData();
     }
 

@@ -14,7 +14,6 @@ class FooterComponent extends React.Component {
     }
 
     render() {
-
         return (
             <Grid>
                 <Row className="show-grid">

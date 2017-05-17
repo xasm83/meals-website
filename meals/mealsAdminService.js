@@ -15,7 +15,7 @@ class MealsAdminService {
         this.mealDao.get({_id: new ObjectID(_id)}, callback);
     };
 
-    update(meal, callback) {
+    update(_id, meal, callback) {
         this.mealDao.update({_id: new ObjectID(_id)},
             Object.assign(meal, {_id: new ObjectID(_id)}), callback);
     }

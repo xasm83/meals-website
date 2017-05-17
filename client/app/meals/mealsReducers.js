@@ -9,7 +9,6 @@ const hasFailed = (hasFailed = false, action) => {
     }
 };
 
-
 const meals = (meals = [], action) => {
     switch (action.type) {
         case 'MEALS_FETCHED':

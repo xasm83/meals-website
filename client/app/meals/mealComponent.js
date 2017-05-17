@@ -19,7 +19,7 @@ class MealComponent extends React.Component {
         if (this.props.match.params.id) {
             this.props.fetchMeal(this.props.match.params.id);
         } else {
-            this.props.setMealToEdit({_id: -1, text: "", date: new Date(), calories: 0});
+            this.props.setMealToEdit({_id: -1, text: "", date: new Date(), calories: 0, username: ""},);
         }
     }
 
@@ -29,15 +29,10 @@ class MealComponent extends React.Component {
 
     render() {
         return (
-
             <div className="vertical-center">
                 <Grid>
                     <Row className="show-grid">
                         <Col md={10} mdOffset={1}>
-
-                            {this.props.hasFailed &&
-                            <Alert bsStyle="danger">Error handling meal</Alert>}
-
                             <form>
                                 <FormGroup controlId="calories" validationState={this.props.validationState}>
                                     <ControlLabel>Calories</ControlLabel>
@@ -62,7 +57,6 @@ class MealComponent extends React.Component {
                                 <FormGroup controlId="text">
                                     <ControlLabel>Date</ControlLabel>
                                     <ReactDatetime value={this.props.meal.date} onChange={this.props.handleDateChange}/>
-
                                 </FormGroup>
 
                                 <FormGroup>
@@ -78,7 +72,6 @@ class MealComponent extends React.Component {
                                             onClick={ () => this.props.deleteMeal(this.props.match.params.id, this.props.history)}>Delete</Button>
                                 </FormGroup>
                                 }
-
 
                                 <FormGroup>
                                     <Link to={'/meals'}><Button bsStyle="primary">Cancel</Button></Link>

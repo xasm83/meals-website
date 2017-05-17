@@ -68,7 +68,9 @@ MongoClient.connect("mongodb://localhost:27017/mealDatabase", {w: 'majority'}, f
     acl.allow([
         {
             roles: 'admin_role',
-            allows: [{resources: '/api/admin/meals', permissions: '*'}]
+            allows: [{resources: '/api/admin/meals', permissions: '*'},
+                {resources: '/api/roles/add', permissions: '*'},
+                {resources: '/api/roles/remove', permissions: '*'}]
         }
     ]);
     acl.addUserRoles('admin', 'admin_role');
@@ -82,17 +84,19 @@ MongoClient.connect("mongodb://localhost:27017/mealDatabase", {w: 'majority'}, f
     });
 
     // Setting a new role
-    app.get('/roles/add', isAuthenticated, aclMiddleware, function (request, response, next) {
-        acl.addUserRoles(request.params.user, request.params.role);
-        response.send(request.params.user + ' is a ' + request.params.role);
+    app.get('/api/roles/add', isAuthenticated, aclMiddleware, function (request, response, next) {
+        acl.addUserRoles(request.query.user, request.query.role, (err) => {
+            response.send(request.query.user + ' is a ' + request.query.role);
+        });
     });
 
     // Unsetting a role
-    app.get('/roles/remove', isAuthenticated, aclMiddleware, function (request, response, next) {
-        acl.removeUserRoles(request.params.user, request.params.role);
-        response.send(request.params.user + ' is not a ' + request.params.role + ' anymore.');
-    });
+    app.get('/api/roles/remove', isAuthenticated, aclMiddleware, function (request, response, next) {
+        acl.removeUserRoles(request.query.user, request.query.role, (err) => {
+            response.send(request.query.user + ' is not a ' + request.query.role + ' anymore.');
+        });
 
+    });
 
 
     app.get('/api/meals', isAuthenticated, (req, res) => {
